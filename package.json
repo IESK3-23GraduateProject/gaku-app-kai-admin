@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-router": "^1.76.1",
+    "@tanstack/router": "^0.0.1-beta.53",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.453.0",
@@ -21,10 +23,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@tanstack/router-devtools": "^1.76.1",
+    "@tanstack/router-plugin": "^1.76.0",
     "@types/node": "^22.7.6",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.2",
+    "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
