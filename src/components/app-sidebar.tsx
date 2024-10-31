@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/sidebar"
 
 // Insert Data Here
-const data = {
+export const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
@@ -106,7 +106,6 @@ const data = {
     },
   ],
 }
-
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
