@@ -79,7 +79,7 @@ export function NavProjects({
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>設定</span>
+            <span><Link to="/settings">設定</Link></span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

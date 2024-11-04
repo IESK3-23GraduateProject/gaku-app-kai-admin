@@ -13,17 +13,24 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as PostsImport } from './routes/posts'
+import { Route as OshiraseImport } from './routes/oshirase'
+import { Route as ClassImport } from './routes/class'
+import { Route as AbsenceImport } from './routes/absence'
 import { Route as PostsIndexImport } from './routes/posts.index'
 import { Route as OshiraseIndexImport } from './routes/oshirase.index'
 import { Route as ClassIndexImport } from './routes/class.index'
 import { Route as AbsenceIndexImport } from './routes/absence.index'
+import { Route as SettingsNotificationsImport } from './routes/settings.notifications'
 import { Route as PostsPostIdImport } from './routes/posts.$postId'
 import { Route as OshiraseTeacherImport } from './routes/oshirase.teacher'
 import { Route as OshiraseNewImport } from './routes/oshirase.new'
 import { Route as OshirasePostIdImport } from './routes/oshirase.$postId'
+import { Route as ClassHomeroomImport } from './routes/class.homeroom'
 import { Route as ClassPostIdImport } from './routes/class.$postId'
+import { Route as AdminAdminImport } from './routes/admin/admin'
 import { Route as AbsencePostIdImport } from './routes/absence.$postId'
 import { Route as LayoutLayoutImport } from './routes/_layout/layout'
 import { Route as AdminAdminStudentImport } from './routes/admin/admin.student'
@@ -32,9 +39,22 @@ import { Route as AdminAdminClassImport } from './routes/admin/admin.class'
 
 // Create Virtual Routes
 
+const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const AboutLazyRoute = AboutLazyImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ProfileRoute = ProfileImport.update({
   id: '/profile',
@@ -45,6 +65,24 @@ const ProfileRoute = ProfileImport.update({
 const PostsRoute = PostsImport.update({
   id: '/posts',
   path: '/posts',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const OshiraseRoute = OshiraseImport.update({
+  id: '/oshirase',
+  path: '/oshirase',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ClassRoute = ClassImport.update({
+  id: '/class',
+  path: '/class',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AbsenceRoute = AbsenceImport.update({
+  id: '/absence',
+  path: '/absence',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -61,21 +99,27 @@ const PostsIndexRoute = PostsIndexImport.update({
 } as any)
 
 const OshiraseIndexRoute = OshiraseIndexImport.update({
-  id: '/oshirase/',
-  path: '/oshirase/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => OshiraseRoute,
 } as any)
 
 const ClassIndexRoute = ClassIndexImport.update({
-  id: '/class/',
-  path: '/class/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ClassRoute,
 } as any)
 
 const AbsenceIndexRoute = AbsenceIndexImport.update({
-  id: '/absence/',
-  path: '/absence/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AbsenceRoute,
+} as any)
+
+const SettingsNotificationsRoute = SettingsNotificationsImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => SettingsRoute,
 } as any)
 
 const PostsPostIdRoute = PostsPostIdImport.update({
@@ -85,33 +129,45 @@ const PostsPostIdRoute = PostsPostIdImport.update({
 } as any)
 
 const OshiraseTeacherRoute = OshiraseTeacherImport.update({
-  id: '/oshirase/teacher',
-  path: '/oshirase/teacher',
-  getParentRoute: () => rootRoute,
+  id: '/teacher',
+  path: '/teacher',
+  getParentRoute: () => OshiraseRoute,
 } as any)
 
 const OshiraseNewRoute = OshiraseNewImport.update({
-  id: '/oshirase/new',
-  path: '/oshirase/new',
-  getParentRoute: () => rootRoute,
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => OshiraseRoute,
 } as any)
 
 const OshirasePostIdRoute = OshirasePostIdImport.update({
-  id: '/oshirase/$postId',
-  path: '/oshirase/$postId',
-  getParentRoute: () => rootRoute,
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => OshiraseRoute,
+} as any)
+
+const ClassHomeroomRoute = ClassHomeroomImport.update({
+  id: '/homeroom',
+  path: '/homeroom',
+  getParentRoute: () => ClassRoute,
 } as any)
 
 const ClassPostIdRoute = ClassPostIdImport.update({
-  id: '/class/$postId',
-  path: '/class/$postId',
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => ClassRoute,
+} as any)
+
+const AdminAdminRoute = AdminAdminImport.update({
+  id: '/admin/admin',
+  path: '/admin/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
 const AbsencePostIdRoute = AbsencePostIdImport.update({
-  id: '/absence/$postId',
-  path: '/absence/$postId',
-  getParentRoute: () => rootRoute,
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => AbsenceRoute,
 } as any)
 
 const LayoutLayoutRoute = LayoutLayoutImport.update({
@@ -121,21 +177,21 @@ const LayoutLayoutRoute = LayoutLayoutImport.update({
 } as any)
 
 const AdminAdminStudentRoute = AdminAdminStudentImport.update({
-  id: '/admin/admin/student',
-  path: '/admin/admin/student',
-  getParentRoute: () => rootRoute,
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => AdminAdminRoute,
 } as any)
 
 const AdminAdminSchoolRoute = AdminAdminSchoolImport.update({
-  id: '/admin/admin/school',
-  path: '/admin/admin/school',
-  getParentRoute: () => rootRoute,
+  id: '/school',
+  path: '/school',
+  getParentRoute: () => AdminAdminRoute,
 } as any)
 
 const AdminAdminClassRoute = AdminAdminClassImport.update({
-  id: '/admin/admin/class',
-  path: '/admin/admin/class',
-  getParentRoute: () => rootRoute,
+  id: '/class',
+  path: '/class',
+  getParentRoute: () => AdminAdminRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -147,6 +203,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/absence': {
+      id: '/absence'
+      path: '/absence'
+      fullPath: '/absence'
+      preLoaderRoute: typeof AbsenceImport
+      parentRoute: typeof rootRoute
+    }
+    '/class': {
+      id: '/class'
+      path: '/class'
+      fullPath: '/class'
+      preLoaderRoute: typeof ClassImport
+      parentRoute: typeof rootRoute
+    }
+    '/oshirase': {
+      id: '/oshirase'
+      path: '/oshirase'
+      fullPath: '/oshirase'
+      preLoaderRoute: typeof OshiraseImport
       parentRoute: typeof rootRoute
     }
     '/posts': {
@@ -163,6 +240,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileImport
       parentRoute: typeof rootRoute
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/_layout/layout': {
       id: '/_layout/layout'
       path: '/layout'
@@ -172,38 +263,52 @@ declare module '@tanstack/react-router' {
     }
     '/absence/$postId': {
       id: '/absence/$postId'
-      path: '/absence/$postId'
+      path: '/$postId'
       fullPath: '/absence/$postId'
       preLoaderRoute: typeof AbsencePostIdImport
+      parentRoute: typeof AbsenceImport
+    }
+    '/admin/admin': {
+      id: '/admin/admin'
+      path: '/admin/admin'
+      fullPath: '/admin/admin'
+      preLoaderRoute: typeof AdminAdminImport
       parentRoute: typeof rootRoute
     }
     '/class/$postId': {
       id: '/class/$postId'
-      path: '/class/$postId'
+      path: '/$postId'
       fullPath: '/class/$postId'
       preLoaderRoute: typeof ClassPostIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof ClassImport
+    }
+    '/class/homeroom': {
+      id: '/class/homeroom'
+      path: '/homeroom'
+      fullPath: '/class/homeroom'
+      preLoaderRoute: typeof ClassHomeroomImport
+      parentRoute: typeof ClassImport
     }
     '/oshirase/$postId': {
       id: '/oshirase/$postId'
-      path: '/oshirase/$postId'
+      path: '/$postId'
       fullPath: '/oshirase/$postId'
       preLoaderRoute: typeof OshirasePostIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof OshiraseImport
     }
     '/oshirase/new': {
       id: '/oshirase/new'
-      path: '/oshirase/new'
+      path: '/new'
       fullPath: '/oshirase/new'
       preLoaderRoute: typeof OshiraseNewImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof OshiraseImport
     }
     '/oshirase/teacher': {
       id: '/oshirase/teacher'
-      path: '/oshirase/teacher'
+      path: '/teacher'
       fullPath: '/oshirase/teacher'
       preLoaderRoute: typeof OshiraseTeacherImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof OshiraseImport
     }
     '/posts/$postId': {
       id: '/posts/$postId'
@@ -212,26 +317,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdImport
       parentRoute: typeof PostsImport
     }
+    '/settings/notifications': {
+      id: '/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof SettingsNotificationsImport
+      parentRoute: typeof SettingsImport
+    }
     '/absence/': {
       id: '/absence/'
-      path: '/absence'
-      fullPath: '/absence'
+      path: '/'
+      fullPath: '/absence/'
       preLoaderRoute: typeof AbsenceIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AbsenceImport
     }
     '/class/': {
       id: '/class/'
-      path: '/class'
-      fullPath: '/class'
+      path: '/'
+      fullPath: '/class/'
       preLoaderRoute: typeof ClassIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof ClassImport
     }
     '/oshirase/': {
       id: '/oshirase/'
-      path: '/oshirase'
-      fullPath: '/oshirase'
+      path: '/'
+      fullPath: '/oshirase/'
       preLoaderRoute: typeof OshiraseIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof OshiraseImport
     }
     '/posts/': {
       id: '/posts/'
@@ -242,29 +354,74 @@ declare module '@tanstack/react-router' {
     }
     '/admin/admin/class': {
       id: '/admin/admin/class'
-      path: '/admin/admin/class'
+      path: '/class'
       fullPath: '/admin/admin/class'
       preLoaderRoute: typeof AdminAdminClassImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AdminAdminImport
     }
     '/admin/admin/school': {
       id: '/admin/admin/school'
-      path: '/admin/admin/school'
+      path: '/school'
       fullPath: '/admin/admin/school'
       preLoaderRoute: typeof AdminAdminSchoolImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AdminAdminImport
     }
     '/admin/admin/student': {
       id: '/admin/admin/student'
-      path: '/admin/admin/student'
+      path: '/student'
       fullPath: '/admin/admin/student'
       preLoaderRoute: typeof AdminAdminStudentImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AdminAdminImport
     }
   }
 }
 
 // Create and export the route tree
+
+interface AbsenceRouteChildren {
+  AbsencePostIdRoute: typeof AbsencePostIdRoute
+  AbsenceIndexRoute: typeof AbsenceIndexRoute
+}
+
+const AbsenceRouteChildren: AbsenceRouteChildren = {
+  AbsencePostIdRoute: AbsencePostIdRoute,
+  AbsenceIndexRoute: AbsenceIndexRoute,
+}
+
+const AbsenceRouteWithChildren =
+  AbsenceRoute._addFileChildren(AbsenceRouteChildren)
+
+interface ClassRouteChildren {
+  ClassPostIdRoute: typeof ClassPostIdRoute
+  ClassHomeroomRoute: typeof ClassHomeroomRoute
+  ClassIndexRoute: typeof ClassIndexRoute
+}
+
+const ClassRouteChildren: ClassRouteChildren = {
+  ClassPostIdRoute: ClassPostIdRoute,
+  ClassHomeroomRoute: ClassHomeroomRoute,
+  ClassIndexRoute: ClassIndexRoute,
+}
+
+const ClassRouteWithChildren = ClassRoute._addFileChildren(ClassRouteChildren)
+
+interface OshiraseRouteChildren {
+  OshirasePostIdRoute: typeof OshirasePostIdRoute
+  OshiraseNewRoute: typeof OshiraseNewRoute
+  OshiraseTeacherRoute: typeof OshiraseTeacherRoute
+  OshiraseIndexRoute: typeof OshiraseIndexRoute
+}
+
+const OshiraseRouteChildren: OshiraseRouteChildren = {
+  OshirasePostIdRoute: OshirasePostIdRoute,
+  OshiraseNewRoute: OshiraseNewRoute,
+  OshiraseTeacherRoute: OshiraseTeacherRoute,
+  OshiraseIndexRoute: OshiraseIndexRoute,
+}
+
+const OshiraseRouteWithChildren = OshiraseRoute._addFileChildren(
+  OshiraseRouteChildren,
+)
 
 interface PostsRouteChildren {
   PostsPostIdRoute: typeof PostsPostIdRoute
@@ -278,20 +435,56 @@ const PostsRouteChildren: PostsRouteChildren = {
 
 const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
 
+interface SettingsRouteChildren {
+  SettingsNotificationsRoute: typeof SettingsNotificationsRoute
+}
+
+const SettingsRouteChildren: SettingsRouteChildren = {
+  SettingsNotificationsRoute: SettingsNotificationsRoute,
+}
+
+const SettingsRouteWithChildren = SettingsRoute._addFileChildren(
+  SettingsRouteChildren,
+)
+
+interface AdminAdminRouteChildren {
+  AdminAdminClassRoute: typeof AdminAdminClassRoute
+  AdminAdminSchoolRoute: typeof AdminAdminSchoolRoute
+  AdminAdminStudentRoute: typeof AdminAdminStudentRoute
+}
+
+const AdminAdminRouteChildren: AdminAdminRouteChildren = {
+  AdminAdminClassRoute: AdminAdminClassRoute,
+  AdminAdminSchoolRoute: AdminAdminSchoolRoute,
+  AdminAdminStudentRoute: AdminAdminStudentRoute,
+}
+
+const AdminAdminRouteWithChildren = AdminAdminRoute._addFileChildren(
+  AdminAdminRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/absence': typeof AbsenceRouteWithChildren
+  '/class': typeof ClassRouteWithChildren
+  '/oshirase': typeof OshiraseRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRouteWithChildren
+  '/about': typeof AboutLazyRoute
   '/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
+  '/admin/admin': typeof AdminAdminRouteWithChildren
   '/class/$postId': typeof ClassPostIdRoute
+  '/class/homeroom': typeof ClassHomeroomRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
   '/posts/$postId': typeof PostsPostIdRoute
-  '/absence': typeof AbsenceIndexRoute
-  '/class': typeof ClassIndexRoute
-  '/oshirase': typeof OshiraseIndexRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/absence/': typeof AbsenceIndexRoute
+  '/class/': typeof ClassIndexRoute
+  '/oshirase/': typeof OshiraseIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/admin/admin/class': typeof AdminAdminClassRoute
   '/admin/admin/school': typeof AdminAdminSchoolRoute
@@ -301,13 +494,18 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRouteWithChildren
+  '/about': typeof AboutLazyRoute
   '/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
+  '/admin/admin': typeof AdminAdminRouteWithChildren
   '/class/$postId': typeof ClassPostIdRoute
+  '/class/homeroom': typeof ClassHomeroomRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
   '/absence': typeof AbsenceIndexRoute
   '/class': typeof ClassIndexRoute
   '/oshirase': typeof OshiraseIndexRoute
@@ -320,15 +518,23 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/absence': typeof AbsenceRouteWithChildren
+  '/class': typeof ClassRouteWithChildren
+  '/oshirase': typeof OshiraseRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRouteWithChildren
+  '/about': typeof AboutLazyRoute
   '/_layout/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
+  '/admin/admin': typeof AdminAdminRouteWithChildren
   '/class/$postId': typeof ClassPostIdRoute
+  '/class/homeroom': typeof ClassHomeroomRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
   '/posts/$postId': typeof PostsPostIdRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
   '/absence/': typeof AbsenceIndexRoute
   '/class/': typeof ClassIndexRoute
   '/oshirase/': typeof OshiraseIndexRoute
@@ -342,18 +548,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/absence'
+    | '/class'
+    | '/oshirase'
     | '/posts'
     | '/profile'
+    | '/settings'
+    | '/about'
     | '/layout'
     | '/absence/$postId'
+    | '/admin/admin'
     | '/class/$postId'
+    | '/class/homeroom'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
     | '/posts/$postId'
-    | '/absence'
-    | '/class'
-    | '/oshirase'
+    | '/settings/notifications'
+    | '/absence/'
+    | '/class/'
+    | '/oshirase/'
     | '/posts/'
     | '/admin/admin/class'
     | '/admin/admin/school'
@@ -362,13 +576,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/profile'
+    | '/settings'
+    | '/about'
     | '/layout'
     | '/absence/$postId'
+    | '/admin/admin'
     | '/class/$postId'
+    | '/class/homeroom'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
     | '/posts/$postId'
+    | '/settings/notifications'
     | '/absence'
     | '/class'
     | '/oshirase'
@@ -379,15 +598,23 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/absence'
+    | '/class'
+    | '/oshirase'
     | '/posts'
     | '/profile'
+    | '/settings'
+    | '/about'
     | '/_layout/layout'
     | '/absence/$postId'
+    | '/admin/admin'
     | '/class/$postId'
+    | '/class/homeroom'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
     | '/posts/$postId'
+    | '/settings/notifications'
     | '/absence/'
     | '/class/'
     | '/oshirase/'
@@ -400,38 +627,28 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  AbsenceRoute: typeof AbsenceRouteWithChildren
+  ClassRoute: typeof ClassRouteWithChildren
+  OshiraseRoute: typeof OshiraseRouteWithChildren
   PostsRoute: typeof PostsRouteWithChildren
   ProfileRoute: typeof ProfileRoute
+  SettingsRoute: typeof SettingsRouteWithChildren
+  AboutLazyRoute: typeof AboutLazyRoute
   LayoutLayoutRoute: typeof LayoutLayoutRoute
-  AbsencePostIdRoute: typeof AbsencePostIdRoute
-  ClassPostIdRoute: typeof ClassPostIdRoute
-  OshirasePostIdRoute: typeof OshirasePostIdRoute
-  OshiraseNewRoute: typeof OshiraseNewRoute
-  OshiraseTeacherRoute: typeof OshiraseTeacherRoute
-  AbsenceIndexRoute: typeof AbsenceIndexRoute
-  ClassIndexRoute: typeof ClassIndexRoute
-  OshiraseIndexRoute: typeof OshiraseIndexRoute
-  AdminAdminClassRoute: typeof AdminAdminClassRoute
-  AdminAdminSchoolRoute: typeof AdminAdminSchoolRoute
-  AdminAdminStudentRoute: typeof AdminAdminStudentRoute
+  AdminAdminRoute: typeof AdminAdminRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  AbsenceRoute: AbsenceRouteWithChildren,
+  ClassRoute: ClassRouteWithChildren,
+  OshiraseRoute: OshiraseRouteWithChildren,
   PostsRoute: PostsRouteWithChildren,
   ProfileRoute: ProfileRoute,
+  SettingsRoute: SettingsRouteWithChildren,
+  AboutLazyRoute: AboutLazyRoute,
   LayoutLayoutRoute: LayoutLayoutRoute,
-  AbsencePostIdRoute: AbsencePostIdRoute,
-  ClassPostIdRoute: ClassPostIdRoute,
-  OshirasePostIdRoute: OshirasePostIdRoute,
-  OshiraseNewRoute: OshiraseNewRoute,
-  OshiraseTeacherRoute: OshiraseTeacherRoute,
-  AbsenceIndexRoute: AbsenceIndexRoute,
-  ClassIndexRoute: ClassIndexRoute,
-  OshiraseIndexRoute: OshiraseIndexRoute,
-  AdminAdminClassRoute: AdminAdminClassRoute,
-  AdminAdminSchoolRoute: AdminAdminSchoolRoute,
-  AdminAdminStudentRoute: AdminAdminStudentRoute,
+  AdminAdminRoute: AdminAdminRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -447,24 +664,43 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/absence",
+        "/class",
+        "/oshirase",
         "/posts",
         "/profile",
+        "/settings",
+        "/about",
         "/_layout/layout",
-        "/absence/$postId",
-        "/class/$postId",
-        "/oshirase/$postId",
-        "/oshirase/new",
-        "/oshirase/teacher",
-        "/absence/",
-        "/class/",
-        "/oshirase/",
-        "/admin/admin/class",
-        "/admin/admin/school",
-        "/admin/admin/student"
+        "/admin/admin"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/absence": {
+      "filePath": "absence.tsx",
+      "children": [
+        "/absence/$postId",
+        "/absence/"
+      ]
+    },
+    "/class": {
+      "filePath": "class.tsx",
+      "children": [
+        "/class/$postId",
+        "/class/homeroom",
+        "/class/"
+      ]
+    },
+    "/oshirase": {
+      "filePath": "oshirase.tsx",
+      "children": [
+        "/oshirase/$postId",
+        "/oshirase/new",
+        "/oshirase/teacher",
+        "/oshirase/"
+      ]
     },
     "/posts": {
       "filePath": "posts.tsx",
@@ -476,49 +712,85 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile.tsx"
     },
+    "/settings": {
+      "filePath": "settings.tsx",
+      "children": [
+        "/settings/notifications"
+      ]
+    },
+    "/about": {
+      "filePath": "about.lazy.tsx"
+    },
     "/_layout/layout": {
       "filePath": "_layout/layout.tsx"
     },
     "/absence/$postId": {
-      "filePath": "absence.$postId.tsx"
+      "filePath": "absence.$postId.tsx",
+      "parent": "/absence"
+    },
+    "/admin/admin": {
+      "filePath": "admin/admin.tsx",
+      "children": [
+        "/admin/admin/class",
+        "/admin/admin/school",
+        "/admin/admin/student"
+      ]
     },
     "/class/$postId": {
-      "filePath": "class.$postId.tsx"
+      "filePath": "class.$postId.tsx",
+      "parent": "/class"
+    },
+    "/class/homeroom": {
+      "filePath": "class.homeroom.tsx",
+      "parent": "/class"
     },
     "/oshirase/$postId": {
-      "filePath": "oshirase.$postId.tsx"
+      "filePath": "oshirase.$postId.tsx",
+      "parent": "/oshirase"
     },
     "/oshirase/new": {
-      "filePath": "oshirase.new.tsx"
+      "filePath": "oshirase.new.tsx",
+      "parent": "/oshirase"
     },
     "/oshirase/teacher": {
-      "filePath": "oshirase.teacher.tsx"
+      "filePath": "oshirase.teacher.tsx",
+      "parent": "/oshirase"
     },
     "/posts/$postId": {
       "filePath": "posts.$postId.tsx",
       "parent": "/posts"
     },
+    "/settings/notifications": {
+      "filePath": "settings.notifications.tsx",
+      "parent": "/settings"
+    },
     "/absence/": {
-      "filePath": "absence.index.tsx"
+      "filePath": "absence.index.tsx",
+      "parent": "/absence"
     },
     "/class/": {
-      "filePath": "class.index.tsx"
+      "filePath": "class.index.tsx",
+      "parent": "/class"
     },
     "/oshirase/": {
-      "filePath": "oshirase.index.tsx"
+      "filePath": "oshirase.index.tsx",
+      "parent": "/oshirase"
     },
     "/posts/": {
       "filePath": "posts.index.tsx",
       "parent": "/posts"
     },
     "/admin/admin/class": {
-      "filePath": "admin/admin.class.tsx"
+      "filePath": "admin/admin.class.tsx",
+      "parent": "/admin/admin"
     },
     "/admin/admin/school": {
-      "filePath": "admin/admin.school.tsx"
+      "filePath": "admin/admin.school.tsx",
+      "parent": "/admin/admin"
     },
     "/admin/admin/student": {
-      "filePath": "admin/admin.student.tsx"
+      "filePath": "admin/admin.student.tsx",
+      "parent": "/admin/admin"
     }
   }
 }

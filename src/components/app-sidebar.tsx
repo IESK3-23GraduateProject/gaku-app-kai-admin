@@ -1,12 +1,7 @@
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
   Frame,
   GalleryVerticalEnd,
-  Map,
   PieChart,
   Settings2,
   SquareTerminal,
@@ -33,19 +28,9 @@ export const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "ECCコンピュータ専門学校",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      plan: "教員用ページ",
     },
   ],
   navMain: [
@@ -57,38 +42,34 @@ export const data = {
       items: [
         {
           title: "お知らせ一覧",
-          url: "oshirase.index",
+          url: "oshirase",
         },
         {
           title: "教員のお知らせ",
-          url: "oshirase.teacher",
+          url: "oshirase/teacher",
         },
         {
           title: "お知らせを投稿",
-          url: "oshirase.new",
+          url: "oshirase/new",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "クラス",
       url: "#",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "全体クラス",
+          url: "class/",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "担任クラス",
+          url: "class/homeroom",
         },
         {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "クラスおしらせ",
+          url: "class/$postId",
         },
       ],
     },
@@ -96,7 +77,7 @@ export const data = {
   projects: [
     {
       name: "欠席・遅刻",
-      url: "absence.index",
+      url: "absence/index",
       icon: Frame,
     },
     {
