@@ -1,26 +1,27 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
-import Layout from '@/app/dashboard/layout'
+import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
+import SideLayout from '@/components/sideLayout'
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Layout />
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <SideLayout />
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-red-100">
+            {/* Pages here */}
+            <Outlet />
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
 
-      {/* <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-        <Link to="/posts" className="[&.active]:font-bold">
-          Posts
-        </Link>
-      </div>
-      <hr /> */}
-      <Outlet />
       <TanStackRouterDevtools />
     </>
   ),
-})
+});

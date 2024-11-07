@@ -50,8 +50,8 @@ export const data = {
   ],
   navMain: [
     {
-      title: "お知らせ",
-      url: "",
+      title: "ホーム",
+      url: "/",
       icon: SquareTerminal,
       isActive: true,
       items: [

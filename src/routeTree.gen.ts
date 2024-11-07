@@ -23,25 +23,18 @@ import { Route as PostsPostIdImport } from './routes/posts.$postId'
 import { Route as OshiraseTeacherImport } from './routes/oshirase.teacher'
 import { Route as OshiraseNewImport } from './routes/oshirase.new'
 import { Route as OshirasePostIdImport } from './routes/oshirase.$postId'
-import { Route as LayoutLayoutImport } from './routes/layout/layout'
 import { Route as ClassPostIdImport } from './routes/class.$postId'
 import { Route as AbsencePostIdImport } from './routes/absence.$postId'
+import { Route as LayoutLayoutImport } from './routes/_layout/layout'
 import { Route as AdminAdminStudentImport } from './routes/admin/admin.student'
 import { Route as AdminAdminSchoolImport } from './routes/admin/admin.school'
 import { Route as AdminAdminClassImport } from './routes/admin/admin.class'
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const ProfileRoute = ProfileImport.update({
   id: '/profile',
@@ -109,12 +102,6 @@ const OshirasePostIdRoute = OshirasePostIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutLayoutRoute = LayoutLayoutImport.update({
-  id: '/layout/layout',
-  path: '/layout/layout',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const ClassPostIdRoute = ClassPostIdImport.update({
   id: '/class/$postId',
   path: '/class/$postId',
@@ -124,6 +111,12 @@ const ClassPostIdRoute = ClassPostIdImport.update({
 const AbsencePostIdRoute = AbsencePostIdImport.update({
   id: '/absence/$postId',
   path: '/absence/$postId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LayoutLayoutRoute = LayoutLayoutImport.update({
+  id: '/_layout/layout',
+  path: '/layout',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -170,11 +163,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
+    '/_layout/layout': {
+      id: '/_layout/layout'
+      path: '/layout'
+      fullPath: '/layout'
+      preLoaderRoute: typeof LayoutLayoutImport
       parentRoute: typeof rootRoute
     }
     '/absence/$postId': {
@@ -189,13 +182,6 @@ declare module '@tanstack/react-router' {
       path: '/class/$postId'
       fullPath: '/class/$postId'
       preLoaderRoute: typeof ClassPostIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/layout/layout': {
-      id: '/layout/layout'
-      path: '/layout/layout'
-      fullPath: '/layout/layout'
-      preLoaderRoute: typeof LayoutLayoutImport
       parentRoute: typeof rootRoute
     }
     '/oshirase/$postId': {
@@ -296,10 +282,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
-  '/about': typeof AboutLazyRoute
+  '/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
   '/class/$postId': typeof ClassPostIdRoute
-  '/layout/layout': typeof LayoutLayoutRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
@@ -316,10 +301,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/profile': typeof ProfileRoute
-  '/about': typeof AboutLazyRoute
+  '/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
   '/class/$postId': typeof ClassPostIdRoute
-  '/layout/layout': typeof LayoutLayoutRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
@@ -338,10 +322,9 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
-  '/about': typeof AboutLazyRoute
+  '/_layout/layout': typeof LayoutLayoutRoute
   '/absence/$postId': typeof AbsencePostIdRoute
   '/class/$postId': typeof ClassPostIdRoute
-  '/layout/layout': typeof LayoutLayoutRoute
   '/oshirase/$postId': typeof OshirasePostIdRoute
   '/oshirase/new': typeof OshiraseNewRoute
   '/oshirase/teacher': typeof OshiraseTeacherRoute
@@ -361,10 +344,9 @@ export interface FileRouteTypes {
     | '/'
     | '/posts'
     | '/profile'
-    | '/about'
+    | '/layout'
     | '/absence/$postId'
     | '/class/$postId'
-    | '/layout/layout'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
@@ -380,10 +362,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/profile'
-    | '/about'
+    | '/layout'
     | '/absence/$postId'
     | '/class/$postId'
-    | '/layout/layout'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
@@ -400,10 +381,9 @@ export interface FileRouteTypes {
     | '/'
     | '/posts'
     | '/profile'
-    | '/about'
+    | '/_layout/layout'
     | '/absence/$postId'
     | '/class/$postId'
-    | '/layout/layout'
     | '/oshirase/$postId'
     | '/oshirase/new'
     | '/oshirase/teacher'
@@ -422,10 +402,9 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   PostsRoute: typeof PostsRouteWithChildren
   ProfileRoute: typeof ProfileRoute
-  AboutLazyRoute: typeof AboutLazyRoute
+  LayoutLayoutRoute: typeof LayoutLayoutRoute
   AbsencePostIdRoute: typeof AbsencePostIdRoute
   ClassPostIdRoute: typeof ClassPostIdRoute
-  LayoutLayoutRoute: typeof LayoutLayoutRoute
   OshirasePostIdRoute: typeof OshirasePostIdRoute
   OshiraseNewRoute: typeof OshiraseNewRoute
   OshiraseTeacherRoute: typeof OshiraseTeacherRoute
@@ -441,10 +420,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   PostsRoute: PostsRouteWithChildren,
   ProfileRoute: ProfileRoute,
-  AboutLazyRoute: AboutLazyRoute,
+  LayoutLayoutRoute: LayoutLayoutRoute,
   AbsencePostIdRoute: AbsencePostIdRoute,
   ClassPostIdRoute: ClassPostIdRoute,
-  LayoutLayoutRoute: LayoutLayoutRoute,
   OshirasePostIdRoute: OshirasePostIdRoute,
   OshiraseNewRoute: OshiraseNewRoute,
   OshiraseTeacherRoute: OshiraseTeacherRoute,
@@ -471,10 +449,9 @@ export const routeTree = rootRoute
         "/",
         "/posts",
         "/profile",
-        "/about",
+        "/_layout/layout",
         "/absence/$postId",
         "/class/$postId",
-        "/layout/layout",
         "/oshirase/$postId",
         "/oshirase/new",
         "/oshirase/teacher",
@@ -499,17 +476,14 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile.tsx"
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
+    "/_layout/layout": {
+      "filePath": "_layout/layout.tsx"
     },
     "/absence/$postId": {
       "filePath": "absence.$postId.tsx"
     },
     "/class/$postId": {
       "filePath": "class.$postId.tsx"
-    },
-    "/layout/layout": {
-      "filePath": "layout/layout.tsx"
     },
     "/oshirase/$postId": {
       "filePath": "oshirase.$postId.tsx"
