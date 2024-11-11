@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Link } from "@tanstack/react-router"
 
-export function NavProjects({
+export function NavAdmin({
   projects,
 }: {
   projects: {
@@ -37,7 +37,7 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>その他</SidebarGroupLabel>
+      <SidebarGroupLabel>管理者用</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -76,12 +76,6 @@ export function NavProjects({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>設定</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )
