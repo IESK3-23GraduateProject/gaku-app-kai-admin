@@ -11,16 +11,20 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as StudentImport } from './routes/student'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as PostsImport } from './routes/posts'
+import { Route as NewsImport } from './routes/news'
 import { Route as AllusersImport } from './routes/all_users'
+import { Route as AdminImport } from './routes/admin'
+import { Route as AbsencesImport } from './routes/absences'
 import { Route as PostsIndexImport } from './routes/posts.index'
 import { Route as NewsIndexImport } from './routes/news/index'
 import { Route as AbsencesIndexImport } from './routes/absences/index'
 import { Route as PostsPostIdImport } from './routes/posts.$postId'
 import { Route as NewsCreateImport } from './routes/news/create'
 import { Route as NewsNewsidImport } from './routes/news/$news_id'
-import { Route as AdminStudentsImport } from './routes/admin/students'
+import { Route as HrclassStudentsImport } from './routes/hr_class/students'
 import { Route as AdminSchoolEventImport } from './routes/admin/schoolEvent'
 import { Route as AdminClassImport } from './routes/admin/class'
 import { Route as AbsencesAbsenceidImport } from './routes/absences/$absence_id'
@@ -28,6 +32,12 @@ import { Route as HrclassStudentsIndexImport } from './routes/hr_class/students/
 import { Route as HrclassStudentsStudentidImport } from './routes/hr_class/students/$student_id'
 
 // Create/Update Routes
+
+const StudentRoute = StudentImport.update({
+  id: '/student',
+  path: '/student',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ProfileRoute = ProfileImport.update({
   id: '/profile',
@@ -41,9 +51,27 @@ const PostsRoute = PostsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const NewsRoute = NewsImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AllusersRoute = AllusersImport.update({
   id: '/all_users',
   path: '/all_users',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoute = AdminImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AbsencesRoute = AbsencesImport.update({
+  id: '/absences',
+  path: '/absences',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -54,15 +82,15 @@ const PostsIndexRoute = PostsIndexImport.update({
 } as any)
 
 const NewsIndexRoute = NewsIndexImport.update({
-  id: '/news/',
-  path: '/news/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => NewsRoute,
 } as any)
 
 const AbsencesIndexRoute = AbsencesIndexImport.update({
-  id: '/absences/',
-  path: '/absences/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AbsencesRoute,
 } as any)
 
 const PostsPostIdRoute = PostsPostIdImport.update({
@@ -72,62 +100,83 @@ const PostsPostIdRoute = PostsPostIdImport.update({
 } as any)
 
 const NewsCreateRoute = NewsCreateImport.update({
-  id: '/news/create',
-  path: '/news/create',
-  getParentRoute: () => rootRoute,
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => NewsRoute,
 } as any)
 
 const NewsNewsidRoute = NewsNewsidImport.update({
-  id: '/news/$news_id',
-  path: '/news/$news_id',
-  getParentRoute: () => rootRoute,
+  id: '/$news_id',
+  path: '/$news_id',
+  getParentRoute: () => NewsRoute,
 } as any)
 
-const AdminStudentsRoute = AdminStudentsImport.update({
-  id: '/admin/students',
-  path: '/admin/students',
+const HrclassStudentsRoute = HrclassStudentsImport.update({
+  id: '/hr_class/students',
+  path: '/hr_class/students',
   getParentRoute: () => rootRoute,
 } as any)
 
 const AdminSchoolEventRoute = AdminSchoolEventImport.update({
-  id: '/admin/schoolEvent',
-  path: '/admin/schoolEvent',
-  getParentRoute: () => rootRoute,
+  id: '/schoolEvent',
+  path: '/schoolEvent',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 const AdminClassRoute = AdminClassImport.update({
-  id: '/admin/class',
-  path: '/admin/class',
-  getParentRoute: () => rootRoute,
+  id: '/class',
+  path: '/class',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 const AbsencesAbsenceidRoute = AbsencesAbsenceidImport.update({
-  id: '/absences/$absence_id',
-  path: '/absences/$absence_id',
-  getParentRoute: () => rootRoute,
+  id: '/$absence_id',
+  path: '/$absence_id',
+  getParentRoute: () => AbsencesRoute,
 } as any)
 
 const HrclassStudentsIndexRoute = HrclassStudentsIndexImport.update({
-  id: '/hr_class/students/',
-  path: '/hr_class/students/',
-  getParentRoute: () => rootRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => HrclassStudentsRoute,
 } as any)
 
 const HrclassStudentsStudentidRoute = HrclassStudentsStudentidImport.update({
-  id: '/hr_class/students/$student_id',
-  path: '/hr_class/students/$student_id',
-  getParentRoute: () => rootRoute,
+  id: '/$student_id',
+  path: '/$student_id',
+  getParentRoute: () => HrclassStudentsRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/absences': {
+      id: '/absences'
+      path: '/absences'
+      fullPath: '/absences'
+      preLoaderRoute: typeof AbsencesImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminImport
+      parentRoute: typeof rootRoute
+    }
     '/all_users': {
       id: '/all_users'
       path: '/all_users'
       fullPath: '/all_users'
       preLoaderRoute: typeof AllusersImport
+      parentRoute: typeof rootRoute
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsImport
       parentRoute: typeof rootRoute
     }
     '/posts': {
@@ -144,47 +193,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileImport
       parentRoute: typeof rootRoute
     }
+    '/student': {
+      id: '/student'
+      path: '/student'
+      fullPath: '/student'
+      preLoaderRoute: typeof StudentImport
+      parentRoute: typeof rootRoute
+    }
     '/absences/$absence_id': {
       id: '/absences/$absence_id'
-      path: '/absences/$absence_id'
+      path: '/$absence_id'
       fullPath: '/absences/$absence_id'
       preLoaderRoute: typeof AbsencesAbsenceidImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AbsencesImport
     }
     '/admin/class': {
       id: '/admin/class'
-      path: '/admin/class'
+      path: '/class'
       fullPath: '/admin/class'
       preLoaderRoute: typeof AdminClassImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AdminImport
     }
     '/admin/schoolEvent': {
       id: '/admin/schoolEvent'
-      path: '/admin/schoolEvent'
+      path: '/schoolEvent'
       fullPath: '/admin/schoolEvent'
       preLoaderRoute: typeof AdminSchoolEventImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AdminImport
     }
-    '/admin/students': {
-      id: '/admin/students'
-      path: '/admin/students'
-      fullPath: '/admin/students'
-      preLoaderRoute: typeof AdminStudentsImport
+    '/hr_class/students': {
+      id: '/hr_class/students'
+      path: '/hr_class/students'
+      fullPath: '/hr_class/students'
+      preLoaderRoute: typeof HrclassStudentsImport
       parentRoute: typeof rootRoute
     }
     '/news/$news_id': {
       id: '/news/$news_id'
-      path: '/news/$news_id'
+      path: '/$news_id'
       fullPath: '/news/$news_id'
       preLoaderRoute: typeof NewsNewsidImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof NewsImport
     }
     '/news/create': {
       id: '/news/create'
-      path: '/news/create'
+      path: '/create'
       fullPath: '/news/create'
       preLoaderRoute: typeof NewsCreateImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof NewsImport
     }
     '/posts/$postId': {
       id: '/posts/$postId'
@@ -195,17 +251,17 @@ declare module '@tanstack/react-router' {
     }
     '/absences/': {
       id: '/absences/'
-      path: '/absences'
-      fullPath: '/absences'
+      path: '/'
+      fullPath: '/absences/'
       preLoaderRoute: typeof AbsencesIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof AbsencesImport
     }
     '/news/': {
       id: '/news/'
-      path: '/news'
-      fullPath: '/news'
+      path: '/'
+      fullPath: '/news/'
       preLoaderRoute: typeof NewsIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof NewsImport
     }
     '/posts/': {
       id: '/posts/'
@@ -216,22 +272,62 @@ declare module '@tanstack/react-router' {
     }
     '/hr_class/students/$student_id': {
       id: '/hr_class/students/$student_id'
-      path: '/hr_class/students/$student_id'
+      path: '/$student_id'
       fullPath: '/hr_class/students/$student_id'
       preLoaderRoute: typeof HrclassStudentsStudentidImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof HrclassStudentsImport
     }
     '/hr_class/students/': {
       id: '/hr_class/students/'
-      path: '/hr_class/students'
-      fullPath: '/hr_class/students'
+      path: '/'
+      fullPath: '/hr_class/students/'
       preLoaderRoute: typeof HrclassStudentsIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof HrclassStudentsImport
     }
   }
 }
 
 // Create and export the route tree
+
+interface AbsencesRouteChildren {
+  AbsencesAbsenceidRoute: typeof AbsencesAbsenceidRoute
+  AbsencesIndexRoute: typeof AbsencesIndexRoute
+}
+
+const AbsencesRouteChildren: AbsencesRouteChildren = {
+  AbsencesAbsenceidRoute: AbsencesAbsenceidRoute,
+  AbsencesIndexRoute: AbsencesIndexRoute,
+}
+
+const AbsencesRouteWithChildren = AbsencesRoute._addFileChildren(
+  AbsencesRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminClassRoute: typeof AdminClassRoute
+  AdminSchoolEventRoute: typeof AdminSchoolEventRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminClassRoute: AdminClassRoute,
+  AdminSchoolEventRoute: AdminSchoolEventRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface NewsRouteChildren {
+  NewsNewsidRoute: typeof NewsNewsidRoute
+  NewsCreateRoute: typeof NewsCreateRoute
+  NewsIndexRoute: typeof NewsIndexRoute
+}
+
+const NewsRouteChildren: NewsRouteChildren = {
+  NewsNewsidRoute: NewsNewsidRoute,
+  NewsCreateRoute: NewsCreateRoute,
+  NewsIndexRoute: NewsIndexRoute,
+}
+
+const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
 
 interface PostsRouteChildren {
   PostsPostIdRoute: typeof PostsPostIdRoute
@@ -245,31 +341,50 @@ const PostsRouteChildren: PostsRouteChildren = {
 
 const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
 
+interface HrclassStudentsRouteChildren {
+  HrclassStudentsStudentidRoute: typeof HrclassStudentsStudentidRoute
+  HrclassStudentsIndexRoute: typeof HrclassStudentsIndexRoute
+}
+
+const HrclassStudentsRouteChildren: HrclassStudentsRouteChildren = {
+  HrclassStudentsStudentidRoute: HrclassStudentsStudentidRoute,
+  HrclassStudentsIndexRoute: HrclassStudentsIndexRoute,
+}
+
+const HrclassStudentsRouteWithChildren = HrclassStudentsRoute._addFileChildren(
+  HrclassStudentsRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
+  '/absences': typeof AbsencesRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/all_users': typeof AllusersRoute
+  '/news': typeof NewsRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
+  '/student': typeof StudentRoute
   '/absences/$absence_id': typeof AbsencesAbsenceidRoute
   '/admin/class': typeof AdminClassRoute
   '/admin/schoolEvent': typeof AdminSchoolEventRoute
-  '/admin/students': typeof AdminStudentsRoute
+  '/hr_class/students': typeof HrclassStudentsRouteWithChildren
   '/news/$news_id': typeof NewsNewsidRoute
   '/news/create': typeof NewsCreateRoute
   '/posts/$postId': typeof PostsPostIdRoute
-  '/absences': typeof AbsencesIndexRoute
-  '/news': typeof NewsIndexRoute
+  '/absences/': typeof AbsencesIndexRoute
+  '/news/': typeof NewsIndexRoute
   '/posts/': typeof PostsIndexRoute
   '/hr_class/students/$student_id': typeof HrclassStudentsStudentidRoute
-  '/hr_class/students': typeof HrclassStudentsIndexRoute
+  '/hr_class/students/': typeof HrclassStudentsIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/admin': typeof AdminRouteWithChildren
   '/all_users': typeof AllusersRoute
   '/profile': typeof ProfileRoute
+  '/student': typeof StudentRoute
   '/absences/$absence_id': typeof AbsencesAbsenceidRoute
   '/admin/class': typeof AdminClassRoute
   '/admin/schoolEvent': typeof AdminSchoolEventRoute
-  '/admin/students': typeof AdminStudentsRoute
   '/news/$news_id': typeof NewsNewsidRoute
   '/news/create': typeof NewsCreateRoute
   '/posts/$postId': typeof PostsPostIdRoute
@@ -282,13 +397,17 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/absences': typeof AbsencesRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/all_users': typeof AllusersRoute
+  '/news': typeof NewsRouteWithChildren
   '/posts': typeof PostsRouteWithChildren
   '/profile': typeof ProfileRoute
+  '/student': typeof StudentRoute
   '/absences/$absence_id': typeof AbsencesAbsenceidRoute
   '/admin/class': typeof AdminClassRoute
   '/admin/schoolEvent': typeof AdminSchoolEventRoute
-  '/admin/students': typeof AdminStudentsRoute
+  '/hr_class/students': typeof HrclassStudentsRouteWithChildren
   '/news/$news_id': typeof NewsNewsidRoute
   '/news/create': typeof NewsCreateRoute
   '/posts/$postId': typeof PostsPostIdRoute
@@ -302,29 +421,34 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/absences'
+    | '/admin'
     | '/all_users'
+    | '/news'
     | '/posts'
     | '/profile'
+    | '/student'
     | '/absences/$absence_id'
     | '/admin/class'
     | '/admin/schoolEvent'
-    | '/admin/students'
+    | '/hr_class/students'
     | '/news/$news_id'
     | '/news/create'
     | '/posts/$postId'
-    | '/absences'
-    | '/news'
+    | '/absences/'
+    | '/news/'
     | '/posts/'
     | '/hr_class/students/$student_id'
-    | '/hr_class/students'
+    | '/hr_class/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/admin'
     | '/all_users'
     | '/profile'
+    | '/student'
     | '/absences/$absence_id'
     | '/admin/class'
     | '/admin/schoolEvent'
-    | '/admin/students'
     | '/news/$news_id'
     | '/news/create'
     | '/posts/$postId'
@@ -335,13 +459,17 @@ export interface FileRouteTypes {
     | '/hr_class/students'
   id:
     | '__root__'
+    | '/absences'
+    | '/admin'
     | '/all_users'
+    | '/news'
     | '/posts'
     | '/profile'
+    | '/student'
     | '/absences/$absence_id'
     | '/admin/class'
     | '/admin/schoolEvent'
-    | '/admin/students'
+    | '/hr_class/students'
     | '/news/$news_id'
     | '/news/create'
     | '/posts/$postId'
@@ -354,35 +482,25 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
+  AbsencesRoute: typeof AbsencesRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   AllusersRoute: typeof AllusersRoute
+  NewsRoute: typeof NewsRouteWithChildren
   PostsRoute: typeof PostsRouteWithChildren
   ProfileRoute: typeof ProfileRoute
-  AbsencesAbsenceidRoute: typeof AbsencesAbsenceidRoute
-  AdminClassRoute: typeof AdminClassRoute
-  AdminSchoolEventRoute: typeof AdminSchoolEventRoute
-  AdminStudentsRoute: typeof AdminStudentsRoute
-  NewsNewsidRoute: typeof NewsNewsidRoute
-  NewsCreateRoute: typeof NewsCreateRoute
-  AbsencesIndexRoute: typeof AbsencesIndexRoute
-  NewsIndexRoute: typeof NewsIndexRoute
-  HrclassStudentsStudentidRoute: typeof HrclassStudentsStudentidRoute
-  HrclassStudentsIndexRoute: typeof HrclassStudentsIndexRoute
+  StudentRoute: typeof StudentRoute
+  HrclassStudentsRoute: typeof HrclassStudentsRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  AbsencesRoute: AbsencesRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   AllusersRoute: AllusersRoute,
+  NewsRoute: NewsRouteWithChildren,
   PostsRoute: PostsRouteWithChildren,
   ProfileRoute: ProfileRoute,
-  AbsencesAbsenceidRoute: AbsencesAbsenceidRoute,
-  AdminClassRoute: AdminClassRoute,
-  AdminSchoolEventRoute: AdminSchoolEventRoute,
-  AdminStudentsRoute: AdminStudentsRoute,
-  NewsNewsidRoute: NewsNewsidRoute,
-  NewsCreateRoute: NewsCreateRoute,
-  AbsencesIndexRoute: AbsencesIndexRoute,
-  NewsIndexRoute: NewsIndexRoute,
-  HrclassStudentsStudentidRoute: HrclassStudentsStudentidRoute,
-  HrclassStudentsIndexRoute: HrclassStudentsIndexRoute,
+  StudentRoute: StudentRoute,
+  HrclassStudentsRoute: HrclassStudentsRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -395,23 +513,40 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/absences",
+        "/admin",
         "/all_users",
+        "/news",
         "/posts",
         "/profile",
+        "/student",
+        "/hr_class/students"
+      ]
+    },
+    "/absences": {
+      "filePath": "absences.tsx",
+      "children": [
         "/absences/$absence_id",
+        "/absences/"
+      ]
+    },
+    "/admin": {
+      "filePath": "admin.tsx",
+      "children": [
         "/admin/class",
-        "/admin/schoolEvent",
-        "/admin/students",
-        "/news/$news_id",
-        "/news/create",
-        "/absences/",
-        "/news/",
-        "/hr_class/students/$student_id",
-        "/hr_class/students/"
+        "/admin/schoolEvent"
       ]
     },
     "/all_users": {
       "filePath": "all_users.tsx"
+    },
+    "/news": {
+      "filePath": "news.tsx",
+      "children": [
+        "/news/$news_id",
+        "/news/create",
+        "/news/"
+      ]
     },
     "/posts": {
       "filePath": "posts.tsx",
@@ -423,43 +558,59 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile.tsx"
     },
+    "/student": {
+      "filePath": "student.tsx"
+    },
     "/absences/$absence_id": {
-      "filePath": "absences/$absence_id.tsx"
+      "filePath": "absences/$absence_id.tsx",
+      "parent": "/absences"
     },
     "/admin/class": {
-      "filePath": "admin/class.tsx"
+      "filePath": "admin/class.tsx",
+      "parent": "/admin"
     },
     "/admin/schoolEvent": {
-      "filePath": "admin/schoolEvent.tsx"
+      "filePath": "admin/schoolEvent.tsx",
+      "parent": "/admin"
     },
-    "/admin/students": {
-      "filePath": "admin/students.tsx"
+    "/hr_class/students": {
+      "filePath": "hr_class/students.tsx",
+      "children": [
+        "/hr_class/students/$student_id",
+        "/hr_class/students/"
+      ]
     },
     "/news/$news_id": {
-      "filePath": "news/$news_id.tsx"
+      "filePath": "news/$news_id.tsx",
+      "parent": "/news"
     },
     "/news/create": {
-      "filePath": "news/create.tsx"
+      "filePath": "news/create.tsx",
+      "parent": "/news"
     },
     "/posts/$postId": {
       "filePath": "posts.$postId.tsx",
       "parent": "/posts"
     },
     "/absences/": {
-      "filePath": "absences/index.tsx"
+      "filePath": "absences/index.tsx",
+      "parent": "/absences"
     },
     "/news/": {
-      "filePath": "news/index.tsx"
+      "filePath": "news/index.tsx",
+      "parent": "/news"
     },
     "/posts/": {
       "filePath": "posts.index.tsx",
       "parent": "/posts"
     },
     "/hr_class/students/$student_id": {
-      "filePath": "hr_class/students/$student_id.tsx"
+      "filePath": "hr_class/students/$student_id.tsx",
+      "parent": "/hr_class/students"
     },
     "/hr_class/students/": {
-      "filePath": "hr_class/students/index.tsx"
+      "filePath": "hr_class/students/index.tsx",
+      "parent": "/hr_class/students"
     }
   }
 }

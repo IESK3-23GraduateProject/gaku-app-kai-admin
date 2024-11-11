@@ -2,9 +2,9 @@ import * as React from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/absences/')({
-  component: RouteComponent,
+  component: AbsencesComponent,
 })
 
-function RouteComponent() {
+function AbsencesComponent() {
   return 'Hello /absences/!'
 }
