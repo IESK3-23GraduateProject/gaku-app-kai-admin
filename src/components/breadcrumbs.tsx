@@ -21,7 +21,7 @@ export default function Breadcrumbs() {
     // If the pathname is empty, return null for current page title
     if (normalizedPath === "") return null;
 
-    for (const item of [...data.navMain, ...data.projects]) {
+    for (const item of [...data.navMain, ...data.admin]) {
       if (item.url === normalizedPath) return item.title || item.name;
       if (item.items) {
         const subItem = item.items.find(

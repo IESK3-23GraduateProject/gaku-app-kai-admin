@@ -8,7 +8,6 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavAdmin } from "@/components/nav-admin"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
@@ -93,17 +92,16 @@ export const data = {
         },
       ],
     },
-  ],
-  projects: [
     {
-      name: "欠席・遅刻",
-      url: "absence.index",
-      icon: Frame,
-    },
-    {
-      name: "公欠届",
-      url: "absence",
-      icon: PieChart,
+      title: "その他",
+      url: "other",
+      icon: Settings2,
+      items: [
+        {
+          title: "イベント",
+          url: "event",
+        },
+      ],
     },
   ],
   admin: [
@@ -129,7 +127,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavAdmin projects={data.admin} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
