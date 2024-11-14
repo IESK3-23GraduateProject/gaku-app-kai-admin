@@ -28,9 +28,9 @@ export const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "ECCコンピュータ",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
+      plan: "教員アプリ",
     },
   ],
   navMain: [
@@ -88,7 +88,7 @@ export const data = {
         },
         {
           title: "学生個人連絡",
-          url: "hr_class/$student_id",
+          url: "hr_class/contact",
         },
       ],
     },
