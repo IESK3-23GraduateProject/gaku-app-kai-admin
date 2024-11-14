@@ -60,10 +60,6 @@ export const data = {
       icon: Settings2,
       items: [
         {
-          title: "確認",
-          url: "absences",
-        },
-        {
           title: "公欠",
           url: "absences/authorized_absence",
         },
@@ -78,10 +74,6 @@ export const data = {
       url: "hr_class",
       icon: PieChart,
       items: [
-        {
-          title: "ホーム",
-          url: "hr_class",
-        },
         {
           title: "学生",
           url: "hr_class/students",

@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
@@ -14,7 +14,7 @@ export const Route = createRootRoute({
         <AppSidebar />
         <SidebarInset>
           <SideLayout />
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-red-100">
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             {/* Pages here */}
             <Outlet />
           </div>
