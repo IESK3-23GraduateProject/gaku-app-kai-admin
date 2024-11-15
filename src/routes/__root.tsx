@@ -15,12 +15,10 @@ export const Route = createRootRoute({
         <SidebarInset>
           <SideLayout />
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-            {/* Pages here */}
             <Outlet />
           </div>
         </SidebarInset>
       </SidebarProvider>
-
       <TanStackRouterDevtools />
     </>
   ),

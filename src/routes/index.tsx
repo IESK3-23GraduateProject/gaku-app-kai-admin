@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@radix-ui/react-accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,

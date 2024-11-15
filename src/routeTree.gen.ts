@@ -32,7 +32,6 @@ import { Route as AdminClassImport } from './routes/admin/class'
 import { Route as AbsencesLateabsenceImport } from './routes/absences/late_absence'
 import { Route as AbsencesAuthorizedabsenceImport } from './routes/absences/authorized_absence'
 import { Route as AbsencesAbsenceidImport } from './routes/absences/$absence_id'
-import { Route as HrclassStudentsIndexImport } from './routes/hr_class/students/index'
 import { Route as HrclassStudentsStudentidImport } from './routes/hr_class/students/$student_id'
 
 // Create/Update Routes
@@ -161,12 +160,6 @@ const AbsencesAbsenceidRoute = AbsencesAbsenceidImport.update({
   id: '/$absence_id',
   path: '/$absence_id',
   getParentRoute: () => AbsencesRoute,
-} as any)
-
-const HrclassStudentsIndexRoute = HrclassStudentsIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => HrclassStudentsRoute,
 } as any)
 
 const HrclassStudentsStudentidRoute = HrclassStudentsStudentidImport.update({
@@ -333,13 +326,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HrclassStudentsStudentidImport
       parentRoute: typeof HrclassStudentsImport
     }
-    '/hr_class/students/': {
-      id: '/hr_class/students/'
-      path: '/'
-      fullPath: '/hr_class/students/'
-      preLoaderRoute: typeof HrclassStudentsIndexImport
-      parentRoute: typeof HrclassStudentsImport
-    }
   }
 }
 
@@ -375,12 +361,10 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface HrclassStudentsRouteChildren {
   HrclassStudentsStudentidRoute: typeof HrclassStudentsStudentidRoute
-  HrclassStudentsIndexRoute: typeof HrclassStudentsIndexRoute
 }
 
 const HrclassStudentsRouteChildren: HrclassStudentsRouteChildren = {
   HrclassStudentsStudentidRoute: HrclassStudentsStudentidRoute,
-  HrclassStudentsIndexRoute: HrclassStudentsIndexRoute,
 }
 
 const HrclassStudentsRouteWithChildren = HrclassStudentsRoute._addFileChildren(
@@ -439,7 +423,6 @@ export interface FileRoutesByFullPath {
   '/news/edit': typeof NewsEditRoute
   '/news/teacher': typeof NewsTeacherRoute
   '/hr_class/students/$student_id': typeof HrclassStudentsStudentidRoute
-  '/hr_class/students/': typeof HrclassStudentsIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -459,12 +442,12 @@ export interface FileRoutesByTo {
   '/admin/class': typeof AdminClassRoute
   '/admin/schoolEvent': typeof AdminSchoolEventRoute
   '/hr_class/contact': typeof HrclassContactRoute
+  '/hr_class/students': typeof HrclassStudentsRouteWithChildren
   '/news/$news_id': typeof NewsNewsidRoute
   '/news/create': typeof NewsCreateRoute
   '/news/edit': typeof NewsEditRoute
   '/news/teacher': typeof NewsTeacherRoute
   '/hr_class/students/$student_id': typeof HrclassStudentsStudentidRoute
-  '/hr_class/students': typeof HrclassStudentsIndexRoute
 }
 
 export interface FileRoutesById {
@@ -491,7 +474,6 @@ export interface FileRoutesById {
   '/news/edit': typeof NewsEditRoute
   '/news/teacher': typeof NewsTeacherRoute
   '/hr_class/students/$student_id': typeof HrclassStudentsStudentidRoute
-  '/hr_class/students/': typeof HrclassStudentsIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -519,7 +501,6 @@ export interface FileRouteTypes {
     | '/news/edit'
     | '/news/teacher'
     | '/hr_class/students/$student_id'
-    | '/hr_class/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -538,12 +519,12 @@ export interface FileRouteTypes {
     | '/admin/class'
     | '/admin/schoolEvent'
     | '/hr_class/contact'
+    | '/hr_class/students'
     | '/news/$news_id'
     | '/news/create'
     | '/news/edit'
     | '/news/teacher'
     | '/hr_class/students/$student_id'
-    | '/hr_class/students'
   id:
     | '__root__'
     | '/'
@@ -568,7 +549,6 @@ export interface FileRouteTypes {
     | '/news/edit'
     | '/news/teacher'
     | '/hr_class/students/$student_id'
-    | '/hr_class/students/'
   fileRoutesById: FileRoutesById
 }
 
@@ -699,8 +679,7 @@ export const routeTree = rootRoute
       "filePath": "hr_class/students.tsx",
       "parent": "/hr_class",
       "children": [
-        "/hr_class/students/$student_id",
-        "/hr_class/students/"
+        "/hr_class/students/$student_id"
       ]
     },
     "/news/$news_id": {
@@ -721,10 +700,6 @@ export const routeTree = rootRoute
     },
     "/hr_class/students/$student_id": {
       "filePath": "hr_class/students/$student_id.tsx",
-      "parent": "/hr_class/students"
-    },
-    "/hr_class/students/": {
-      "filePath": "hr_class/students/index.tsx",
       "parent": "/hr_class/students"
     }
   }
