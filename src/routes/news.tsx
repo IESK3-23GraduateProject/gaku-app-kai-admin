@@ -7,7 +7,7 @@ export const Route = createFileRoute('/news')({
 function NewsComponent() {
   return (
     <div className="p-2">
-      <div>I'm a News Layout</div>
+      <div> /news</div>
       <Outlet />
     </div>
   )

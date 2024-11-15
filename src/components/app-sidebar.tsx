@@ -36,13 +36,13 @@ export const data = {
   navMain: [
     {
       title: "ホーム",
-      url: "/",
+      url: "news",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "お知らせ一覧",
-          url: "news",
+          url: "/",
         },
         {
           title: "教員のお知らせ",
