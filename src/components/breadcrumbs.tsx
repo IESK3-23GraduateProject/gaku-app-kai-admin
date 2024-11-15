@@ -12,42 +12,72 @@ import { useLocation } from "@tanstack/react-router";
 export default function Breadcrumbs() {
   const location = useLocation();
 
-  // Helper function to find the breadcrumb title
-  const getBreadcrumbTitle = (pathname: string) => {
+  // Helper function to find the main section and subpage titles
+  const getBreadcrumbTitles = (pathname) => {
     const normalizedPath = pathname.startsWith("/")
       ? pathname.slice(1)
       : pathname; // Remove leading slash
 
-    // If the pathname is empty, return null for current page title
-    if (normalizedPath === "") return null;
+    let mainTitle = null;
+    let subTitle = null;
 
-    for (const item of [...data.navMain, ...data.projects]) {
-      if (item.url === normalizedPath) return item.title || item.name;
-      if (item.items) {
-        const subItem = item.items.find(
-          (sub: { url: string }) => sub.url === normalizedPath
+    // Special case for the root route "/"
+    if (normalizedPath === "") {
+      mainTitle = "ホーム";
+      return { mainTitle, subTitle };
+    }
+
+    // Search in navMain sections
+    for (const mainItem of data.navMain) {
+      if (mainItem.url === normalizedPath) {
+        mainTitle = mainItem.title;
+        break;
+      }
+      if (mainItem.items) {
+        const subItem = mainItem.items.find(
+          (sub) => sub.url === normalizedPath
         );
-        if (subItem) return subItem.title;
+        if (subItem) {
+          mainTitle = mainItem.title;
+          subTitle = subItem.title;
+          break;
+        }
       }
     }
 
-    return null; // Return null if no matching title is found
+    // Search in admin sections if not found in navMain
+    if (!mainTitle) {
+      for (const adminItem of data.admin) {
+        if (adminItem.url === normalizedPath) {
+          mainTitle = adminItem.name;
+          break;
+        }
+      }
+    }
+
+    return { mainTitle, subTitle };
   };
 
-  const currentPageTitle = getBreadcrumbTitle(location.pathname);
-  // for debugging
-  //console.log("current pathname :", currentPageTitle)
+  const { mainTitle, subTitle } = getBreadcrumbTitles(location.pathname);
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        <BreadcrumbItem className="hidden md:block">
-          <BreadcrumbLink href="/">ホーム</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator className="hidden md:block" />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{currentPageTitle}</BreadcrumbPage>
-        </BreadcrumbItem>
+        {mainTitle && (
+          <BreadcrumbItem className="hidden md:block">
+            <BreadcrumbLink href={`/${mainTitle === "ホーム" ? "" : mainTitle}`}>
+              {mainTitle}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        )}
+        {subTitle && (
+          <>
+            <BreadcrumbSeparator className="hidden md:block" />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{subTitle}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </>
+        )}
       </BreadcrumbList>
     </Breadcrumb>
   );

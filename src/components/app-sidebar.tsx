@@ -1,19 +1,14 @@
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
   Frame,
   GalleryVerticalEnd,
-  Map,
   PieChart,
   Settings2,
   SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
+import { NavAdmin } from "@/components/nav-admin"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -33,75 +28,83 @@ export const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "ECCコンピュータ",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      plan: "教員アプリ",
     },
   ],
   navMain: [
     {
       title: "ホーム",
-      url: "/",
+      url: "news",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: "お知らせ一覧",
-          url: "oshirase.index",
+          url: "/",
         },
         {
           title: "教員のお知らせ",
-          url: "oshirase.teacher",
+          url: "news/teacher",
         },
         {
           title: "お知らせを投稿",
-          url: "oshirase.new",
+          url: "news/create",
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
+      title: "出欠",
+      url: "absences",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "公欠",
+          url: "absences/authorized_absence",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "遅刻",
+          url: "absences/late_absence",
+        },
+      ],
+    },
+    {
+      title: "担任クラス",
+      url: "hr_class",
+      icon: PieChart,
+      items: [
+        {
+          title: "学生",
+          url: "hr_class/students",
         },
         {
-          title: "Billing",
-          url: "#",
+          title: "学生個人連絡",
+          url: "hr_class/contact",
         },
+      ],
+    },
+    {
+      title: "その他",
+      url: "other",
+      icon: Settings2,
+      items: [
         {
-          title: "Limits",
-          url: "#",
+          title: "イベント",
+          url: "event",
         },
       ],
     },
   ],
-  projects: [
+  admin: [
     {
-      name: "欠席・遅刻",
-      url: "absence.index",
+      name: "クラス",
+      url: "admin/class",
       icon: Frame,
     },
     {
-      name: "公欠届",
-      url: "absence",
+      name: "学校行事",
+      url: "admin/schoolEvent",
       icon: PieChart,
     },
   ],
@@ -115,7 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavAdmin projects={data.admin} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
