@@ -36,7 +36,7 @@ export const data = {
   navMain: [
     {
       title: "メイン",
-      url: "news",
+      url: "/",
       icon: SquareTerminal,
       isActive: true,
       items: [
