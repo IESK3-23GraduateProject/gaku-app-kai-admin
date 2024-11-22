@@ -49,31 +49,38 @@ function NewsComponent() {
 
             <ScrollArea className="h-[700px] rounded-md border p-3 m-5">
               <ol>
-                {posts?.map((post) => (
-                  <div key={post.id}>
-                    <Link
-                      to="/posts/$postId"
-                      params={{
-                        postId: post.id,
-                      }}
-                      className="block py-1 text-blue-600 hover:opacity-75"
-                      activeProps={{ className: "font-bold underline" }}
-                    >
-                      <Card>
-                        <CardHeader>
-                          <CardTitle>
-                            <p>{post.title}</p>
-                          </CardTitle>
-                          <CardDescription>Description</CardDescription>
-                        </CardHeader>
-                        <CardContent></CardContent>
-                        <CardFooter>
-                          <p>Footer</p>
-                        </CardFooter>
-                      </Card>
-                    </Link>
-                  </div>
-                ))}
+                {[
+                  ...posts,
+                  { id: "i-do-not-exist", title: "Non-existent Post" },
+                ].map((post) => {
+                  return (
+                    <li key={post.id} className="whitespace-nowrap">
+                      <Link
+                        to="/news/main/$main_id"
+                        params={{
+                          main_id: post.id,
+                        }}
+                        className="block py-1 text-blue-600 hover:opacity-75"
+                        activeProps={{ className: "font-bold underline" }}
+                      >
+                        <div>
+                          <Card>
+                            <CardHeader>
+                              <CardTitle>
+                                <p>{post.title}</p>
+                              </CardTitle>
+                              <CardDescription>Description</CardDescription>
+                            </CardHeader>
+                            <CardContent></CardContent>
+                            <CardFooter>
+                              <p>Footer</p>
+                            </CardFooter>
+                          </Card>
+                        </div>
+                      </Link>   
+                    </li>
+                  );
+                })}
               </ol>
             </ScrollArea>
           </div>
@@ -83,7 +90,7 @@ function NewsComponent() {
           <div className="h-full m-5">
             <Separator className="my-4" />
             <Button>
-              <Link to="../create">新しいお知らせを投稿</Link>
+              <Link to="/news/create">新しいお知らせを投稿</Link>
             </Button>
             <div>
               <Outlet />
