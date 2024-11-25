@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { Terminal } from "lucide-react";
-import { postsQueryOptions } from "../../api/queries/tNews-query";
+import { postsQueryOptions } from "../../api/queries/posts-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   Card,
@@ -21,7 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export const Route = createFileRoute("/news/teacher")({
+export const Route = createFileRoute("/news/main")({
   component: NewsComponent,
 });
 
@@ -51,14 +51,14 @@ function NewsComponent() {
               <ol>
                 {[
                   ...posts,
-                  { id: "i-do-not-exist", name: "Non-existent Post" },
+                  { id: "i-do-not-exist", title: "Non-existent Post" },
                 ].map((post) => {
                   return (
                     <li key={post.id} className="whitespace-nowrap">
                       <Link
-                        to="/news/teacher/$tNews_id"
+                        to="/news/main/$main_id"
                         params={{
-                          tNews_id: post.id.toString(),
+                          main_id: post.id,
                         }}
                         className="block py-1 text-blue-600 hover:opacity-75"
                         activeProps={{ className: "font-bold underline" }}
@@ -67,9 +67,9 @@ function NewsComponent() {
                           <Card>
                             <CardHeader>
                               <CardTitle>
-                                <p>{post.name}</p>
+                                <p>{post.title}</p>
                               </CardTitle>
-                              <CardDescription>{post.form_name}</CardDescription>
+                              <CardDescription>Description</CardDescription>
                             </CardHeader>
                             <CardContent></CardContent>
                             <CardFooter>
@@ -77,7 +77,7 @@ function NewsComponent() {
                             </CardFooter>
                           </Card>
                         </div>
-                      </Link>
+                      </Link>   
                     </li>
                   );
                 })}

@@ -35,14 +35,18 @@ export const data = {
   ],
   navMain: [
     {
-      title: "ホーム",
-      url: "news",
+      title: "メイン",
+      url: "/",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "お知らせ一覧",
+          title: "ホーム",
           url: "/",
+        },
+        {
+          title: "お知らせ一覧",
+          url: "news/main",
         },
         {
           title: "教員のお知らせ",

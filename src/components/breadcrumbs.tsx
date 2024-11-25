@@ -65,7 +65,7 @@ export default function Breadcrumbs() {
       <BreadcrumbList>
         {mainTitle && (
           <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbLink href={`/${mainTitle === "ホーム" ? "" : mainTitle}`}>
+            <BreadcrumbLink href="/">
               {mainTitle}
             </BreadcrumbLink>
           </BreadcrumbItem>
