@@ -6,8 +6,10 @@ export const Route = createFileRoute('/news')({
 
 function NewsComponent() {
   return (
-    <div className="p-2">
-      <div> お知らせ</div>
+    <div className="my-4 p-2">
+      <div> 
+        お知らせ
+      </div>
       <Outlet />
     </div>
   )

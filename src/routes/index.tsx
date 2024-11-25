@@ -3,7 +3,6 @@ import Calendar from "@/components/home/calendar";
 import Accord from "@/components/home/accord";
 import { Separator } from "@/components/ui/separator";
 import Mail from "@/components/mailList";
-import TeacherMail from "@/components/teacher/mail";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
 
@@ -36,7 +35,6 @@ function RouteComponent() {
 
       <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
         <Separator />
-        <TeacherMail />
       </div>
     </div>
   );
