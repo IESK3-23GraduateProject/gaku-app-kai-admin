@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { postQueryOptions } from '../../api/queries/posts-query'
 import {
   ErrorComponent,
@@ -6,13 +5,14 @@ import {
   useRouter,
 } from '@tanstack/react-router'
 import {
-  useQueryErrorResetBoundary,
   useSuspenseQuery,
 } from '@tanstack/react-query'
 import { PostNotFoundError } from '../../api/posts'
 import type { ErrorComponentProps } from '@tanstack/react-router'
 
+
 export const Route = createFileRoute('/news/main/$main_id')({
+  // @ts-expect-error queryClient
   loader: ({ context: { queryClient }, params: { main_id } }) => {
     return queryClient.ensureQueryData(postQueryOptions(main_id))
   },
@@ -25,11 +25,6 @@ export function MainErrorComponent({ error }: ErrorComponentProps) {
   if (error instanceof PostNotFoundError) {
     return <div>{error.message}</div>
   }
-  const queryErrorResetBoundary = useQueryErrorResetBoundary()
-
-  React.useEffect(() => {
-    queryErrorResetBoundary.reset()
-  }, [queryErrorResetBoundary])
 
   return (
     <div>

@@ -34,20 +34,7 @@ function NewsComponent() {
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel>
           <div>
-            <Alert className="m-5 p-5">
-              <Terminal className="h-4 w-4" />
-              <AlertTitle>注意</AlertTitle>
-              <AlertDescription>大事なお知らせがありました</AlertDescription>
-            </Alert>
-            <div id="sort">
-              <ToggleGroup type="single">
-                <ToggleGroupItem value="a">学生全員</ToggleGroupItem>
-                <ToggleGroupItem value="b">IT学生</ToggleGroupItem>
-                <ToggleGroupItem value="c">ゲーム学生</ToggleGroupItem>
-              </ToggleGroup>
-            </div>
-
-            <ScrollArea className="h-[700px] rounded-md border p-3 m-5">
+            <ScrollArea className="h-[700px]">
               <ol>
                 {[
                   ...posts,

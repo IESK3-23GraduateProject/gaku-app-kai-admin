@@ -1,27 +1,17 @@
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { postsQueryOptions } from "../../api/queries/posts-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { Separator } from "@/components/ui/separator";
-import { Terminal } from "lucide-react";
-import { postsQueryOptions } from "../../api/queries/posts-query";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 export const Route = createFileRoute("/news/main")({
+  // @ts-expect-error queryClient
+  loader: ({ context: { queryClient } }) => {
+    return queryClient.ensureQueryData(postsQueryOptions);
+  },
   component: NewsComponent,
 });
 
@@ -30,72 +20,42 @@ function NewsComponent() {
   const posts = postsQuery.data;
 
   return (
-    <div className="p-2">
-      <ResizablePanelGroup direction="horizontal">
+    <div className="h-screen">
+      <ResizablePanelGroup direction="horizontal" className="h-full">
         <ResizablePanel>
-          <div>
-            <Alert className="m-5 p-5">
-              <Terminal className="h-4 w-4" />
-              <AlertTitle>注意</AlertTitle>
-              <AlertDescription>大事なお知らせがありました</AlertDescription>
-            </Alert>
-            <div id="sort">
-              <ToggleGroup type="single">
-                <ToggleGroupItem value="a">学生全員</ToggleGroupItem>
-                <ToggleGroupItem value="b">IT学生</ToggleGroupItem>
-                <ToggleGroupItem value="c">ゲーム学生</ToggleGroupItem>
-              </ToggleGroup>
+          <div className="h-full flex flex-col">
+            <div className="flex-1 overflow-y-auto">
+              {[
+                ...posts,
+                { id: "i-do-not-exist", title: "Non-existent Post", sender: "Unknown", date: "N/A", preview: "This post does not exist." },
+              ].map((post) => (
+                <Link
+                  key={post.id}
+                  to="/news/main/$main_id"
+                  params={{
+                    main_id: post.id,
+                  }}>
+                  <div
+                    className={`p-4 border-b cursor-pointer hover:bg-gray-50`}
+                  >
+                    <div className="flex justify-between items-start mb-1">
+                      <span className="font-medium text-black">
+                        {post.title}
+                      </span>
+                      <span className="text-sm text-gray-500">{post.date || "Unknown Date"}</span>
+                    </div>
+                    <div className="text-sm text-gray-500 truncate">
+                      {post.date || "No preview available."}
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-
-            <ScrollArea className="h-[700px] rounded-md border p-3 m-5">
-              <ol>
-                {[
-                  ...posts,
-                  { id: "i-do-not-exist", title: "Non-existent Post" },
-                ].map((post) => {
-                  return (
-                    <li key={post.id} className="whitespace-nowrap">
-                      <Link
-                        to="/news/main/$main_id"
-                        params={{
-                          main_id: post.id,
-                        }}
-                        className="block py-1 text-blue-600 hover:opacity-75"
-                        activeProps={{ className: "font-bold underline" }}
-                      >
-                        <div>
-                          <Card>
-                            <CardHeader>
-                              <CardTitle>
-                                <p>{post.title}</p>
-                              </CardTitle>
-                              <CardDescription>Description</CardDescription>
-                            </CardHeader>
-                            <CardContent></CardContent>
-                            <CardFooter>
-                              <p>Footer</p>
-                            </CardFooter>
-                          </Card>
-                        </div>
-                      </Link>   
-                    </li>
-                  );
-                })}
-              </ol>
-            </ScrollArea>
           </div>
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel>
-          <div className="h-full m-5">
-            <Separator className="my-4" />
-            <Button>
-              <Link to="/news/create">新しいお知らせを投稿</Link>
-            </Button>
-            <div>
-              <Outlet />
-            </div>
-          </div>
+        <ResizablePanel className="px-4">
+          <Outlet />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

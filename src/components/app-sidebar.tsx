@@ -19,7 +19,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// Insert Data Here
+// eslint-disable-next-line react-refresh/only-export-components
 export const data = {
   user: {
     name: "shadcn",
