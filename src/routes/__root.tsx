@@ -14,12 +14,12 @@ export const Route = createRootRoute({
         <AppSidebar />
         <SidebarInset>
           <SideLayout />
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="flex flex-1 flex-col">
             <Outlet />
           </div>
         </SidebarInset>
       </SidebarProvider>
-      <TanStackRouterDevtools />
+      <TanStackRouterDevtools position="bottom-right" />
     </>
   ),
 });

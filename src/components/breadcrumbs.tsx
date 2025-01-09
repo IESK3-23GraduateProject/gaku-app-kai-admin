@@ -13,7 +13,7 @@ export default function Breadcrumbs() {
   const location = useLocation();
 
   // Helper function to find the main section and subpage titles
-  const getBreadcrumbTitles = (pathname) => {
+  const getBreadcrumbTitles = (pathname: string) => {
     const normalizedPath = pathname.startsWith("/")
       ? pathname.slice(1)
       : pathname; // Remove leading slash
@@ -65,7 +65,7 @@ export default function Breadcrumbs() {
       <BreadcrumbList>
         {mainTitle && (
           <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbLink href={`/${mainTitle === "ホーム" ? "" : mainTitle}`}>
+            <BreadcrumbLink href="/">
               {mainTitle}
             </BreadcrumbLink>
           </BreadcrumbItem>

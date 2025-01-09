@@ -19,7 +19,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// Insert Data Here
+// eslint-disable-next-line react-refresh/only-export-components
 export const data = {
   user: {
     name: "shadcn",
@@ -35,14 +35,18 @@ export const data = {
   ],
   navMain: [
     {
-      title: "ホーム",
-      url: "news",
+      title: "メイン",
+      url: "/",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "お知らせ一覧",
+          title: "ホーム",
           url: "/",
+        },
+        {
+          title: "お知らせ一覧",
+          url: "news/main",
         },
         {
           title: "教員のお知らせ",

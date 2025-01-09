@@ -6,9 +6,6 @@ export const Route = createFileRoute('/news')({
 
 function NewsComponent() {
   return (
-    <div className="p-2">
-      <div> /news</div>
-      <Outlet />
-    </div>
+    <Outlet />
   )
 }
