@@ -1,24 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createFileRoute } from "@tanstack/react-router";
 import { Separator } from "@/components/ui/separator";
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Color from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
 import ListItem from "@tiptap/extension-list-item";
 
 export const Route = createFileRoute("/news/create")({
-  component: NewsComponent,
+  component: EditorComponent,
 });
 
 // MenuBar Component
-const MenuBar = ({ editor }: { editor: any }) => {
+const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
     return null;
   }
 
   return (
     <div className="flex flex-wrap gap-2 mb-4">
+      <p>Menu For Text Format</p>
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -70,9 +70,30 @@ const content = `
   <li>Bullet lists</li>
   <li>Are supported too</li>
 </ul>
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam aspernatur, soluta hic aliquam sapiente sit consectetur quod ipsum, odio tempore doloribus tenetur quibusdam voluptatum dicta voluptate, optio minima. Nihil, minima.</p>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<pre><code>code block</code></pre>
+<p><code>code</code> </p>
+<p>ひらかな</p>
+<p>カタカナ</p>
+<p>漢字</p>
 `;
 
-function NewsComponent() {
+// TODO Format this to send data to db
+const logEditorContent = ({ editor }: { editor: Editor | null }) => {
+  if (editor) {
+    console.log("HTML Output:", editor.getHTML());
+    console.log("JSON Output:", editor.getJSON());
+  } else {
+    console.log("Editor is not initialized");
+  }
+};
+
+
+function EditorComponent() {
 
   const editor = useEditor({
     extensions,
@@ -85,15 +106,24 @@ function NewsComponent() {
   });
 
   return (
-    <div className="mx-10">
+    <div className="mx-10 mb-10">
       <h1 className="scroll-m-20 text-xl font-extrabold tracking-tight">
         お知らせ投稿
       </h1>
-      <Separator className="my-4" />
+      <div className="bg-red-200 my-2">
+        <h1>Destionation Menu + Send Button</h1>
+      </div>
+      <Separator className="my-4" />212
       <MenuBar editor={editor} />
       <EditorContent
         editor={editor}
       />
+      <button
+        onClick={() => logEditorContent({ editor })}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Log Editor Content
+      </button>
     </div>
   );
 }

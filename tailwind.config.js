@@ -86,15 +86,88 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            color: "inherit",
-            a: {
-              color: "inherit",
-              textDecoration: "underline",
+            ":first-child": {
+              marginTop: "0",
             },
-            "h1, h2, h3": {
-              color: "inherit",
+            ul: {
+              padding: "0 1rem",
+              margin: "1.25rem 1rem 1.25rem 0.4rem",
+              "li p": {
+                marginTop: "0.25em",
+                marginBottom: "0.25em",
+              },
             },
-            p: { margin: 0 },
+            ol: {
+              padding: "0 1rem",
+              margin: "1.25rem 1rem 1.25rem 0.4rem",
+              "li p": {
+                marginTop: "0.25em",
+                marginBottom: "0.25em",
+              },
+            },
+            h1: {
+              fontSize: "1.4rem",
+              lineHeight: "1.1",
+              marginTop: "1.5rem",
+              marginBottom: "1.5rem",
+            },
+            h2: {
+              fontSize: "1.2rem",
+              lineHeight: "1.1",
+              marginTop: "1.5rem",
+              marginBottom: "1.5rem",
+            },
+            h3: {
+              fontSize: "1.1rem",
+              lineHeight: "1.1",
+              marginTop: "2.5rem",
+            },
+            h4: {
+              fontSize: "1rem",
+              lineHeight: "1.1",
+              marginTop: "2.5rem",
+            },
+            h5: {
+              fontSize: "1rem",
+              lineHeight: "1.1",
+              marginTop: "2.5rem",
+            },
+            h6: {
+              fontSize: "1rem",
+              lineHeight: "1.1",
+              marginTop: "2.5rem",
+            },
+            code: {
+              backgroundColor: "#E9D8FD", // Replace with Tailwind's purple-100 if defined
+              borderRadius: "0.4rem",
+              color: "#1A202C", // Replace with Tailwind's gray-800 if defined
+              fontSize: "0.85rem",
+              padding: "0.25em 0.3em",
+            },
+            pre: {
+              backgroundColor: "#1A202C", // Replace with Tailwind's gray-900 if defined
+              borderRadius: "0.5rem",
+              color: "#FFFFFF", // White
+              fontFamily: "'JetBrainsMono', monospace",
+              margin: "1.5rem 0",
+              padding: "0.75rem 1rem",
+              code: {
+                background: "none",
+                color: "inherit",
+                fontSize: "0.8rem",
+                padding: "0",
+              },
+            },
+            blockquote: {
+              borderLeft: "3px solid #CBD5E0", // Replace with Tailwind's gray-300 if defined
+              margin: "1.5rem 0",
+              paddingLeft: "1rem",
+            },
+            hr: {
+              border: "none",
+              borderTop: "1px solid #E2E8F0", // Replace with Tailwind's gray-200 if defined
+              margin: "2rem 0",
+            },
           },
         },
       },
