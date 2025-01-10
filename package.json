@@ -28,6 +28,8 @@
     "@tanstack/react-router": "^1.76.1",
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/router": "^0.0.1-beta.53",
+    "@tiptap/react": "^2.11.0",
+    "@tiptap/starter-kit": "^2.11.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
