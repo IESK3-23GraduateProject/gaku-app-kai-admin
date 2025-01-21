@@ -20,11 +20,11 @@ function NewsComponent() {
   const posts = postsQuery.data;
 
   return (
-    <div className="h-screen">
+    <div className="h-fit">
       <ResizablePanelGroup direction="horizontal" className="h-full">
-        <ResizablePanel>
+        <ResizablePanel defaultSize={30}>
           <div className="h-full flex flex-col">
-            <div className="flex-1 overflow-y-auto">
+            <div className="max-h-screen flex-1 overflow-y-auto">
               {[
                 ...posts,
                 { id: "i-do-not-exist", title: "Non-existent Post", sender: "Unknown", date: "N/A", preview: "This post does not exist." },
