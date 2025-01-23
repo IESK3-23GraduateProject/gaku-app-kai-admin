@@ -28,7 +28,6 @@ export const Route = createFileRoute("/news/create")({
   component: EditorComponent,
 });
 
-// MenuBar Component
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
     return null;
@@ -192,15 +191,15 @@ const MultipleSelect = () => {
 };
 
 // SendMenu Component
-const SendMenu = ({ editor }: { editor: Editor | null }) => {
-  const [category, setCategory] = useState<number | null>(null);
+const SendMenu = ({ editor, title }: { editor: Editor | null; title: string }) => {
+  const [category, setCategory] = useState<string>("9");
   const [isPublic, setIsPublic] = useState(false); // State for "Is Public" toggle
   const [highPriority, setHighPriority] = useState(false); // State for "High Priority" toggle
   const [mentionedUserIds, setMentionedUserIds] = useState<number[]>([]); // Selected mentioned user IDs
   const [endpoint, setEndpoint] = useState("student-news"); // Default endpoint
 
   const handleCategoryChange = (value: string) => {
-    setCategory(value === "null" ? null : Number(value));
+    setCategory(value);
     console.log("Selected category:", value);
   };
 
@@ -221,8 +220,8 @@ const SendMenu = ({ editor }: { editor: Editor | null }) => {
 
     // Prepare the payload
     const payload = {
-      title: "News Title", // Placeholder; replace with your actual title logic
-      news_category_id: category,
+      title,
+      news_category_id: Number(category),
       news_contents: editor.getHTML(),
       author_id: 3240006, // Placeholder; replace with actual author ID
       author_type: "teacher",
@@ -236,10 +235,10 @@ const SendMenu = ({ editor }: { editor: Editor | null }) => {
     console.log("Payload to be sent:", payload, endpoint);
 
     try {
-      // const url = `http://localhost:3000/${endpoint}`;
+      const url = `http://localhost:3000/${endpoint}`;
 
-      // const response = await axios.post(url, payload);
-      // console.log("Response:", response.data);
+      const response = await axios.post(url, payload);
+      console.log("Response:", response.data);
 
     } catch (error) {
       console.error("Error sending news:", error);
@@ -280,7 +279,6 @@ const SendMenu = ({ editor }: { editor: Editor | null }) => {
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="null">全てのお知らせ</SelectItem>
               <SelectItem value="9">学校からの連絡</SelectItem>
               <SelectItem value="10">担任からの連絡</SelectItem>
               <SelectItem value="11">キャリアセンターより</SelectItem>
@@ -322,6 +320,7 @@ const SendMenu = ({ editor }: { editor: Editor | null }) => {
 
 
 function EditorComponent() {
+  const [title, setTitle] = useState(""); // State for the title
 
   const editor = useEditor({
     extensions,
@@ -333,12 +332,28 @@ function EditorComponent() {
     }
   });
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+
   return (
     <div className="mx-10 mb-10">
       <h1 className="scroll-m-20 text-xl font-extrabold tracking-tight">
         お知らせ投稿
       </h1>
-      <SendMenu editor={editor} />
+      <SendMenu editor={editor} title={title} />
+      {/* Title Input */}
+      <div className="">
+        <input
+          id="title"
+          type="text"
+          value={title}
+          onChange={handleTitleChange}
+          placeholder="Enter the title..."
+          className="mt-1 block w-full outline-none text-3xl font-extrabold"
+        />
+      </div>
       <Separator className="my-4" />
       <MenuBar editor={editor} />
       <EditorContent
