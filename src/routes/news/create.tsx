@@ -160,30 +160,51 @@ const content = `
 `;
 
 
-const MultipleSelect = () => {
-  const OPTIONS = [
-    { label: "Next.js", value: "nextjs" },
-    { label: "React", value: "react" },
-    { label: "Remix", value: "remix" },
-    { label: "Vite", value: "vite" },
-    { label: "Nuxt", value: "nuxt" },
-    { label: "Vue", value: "vue" },
-    { label: "Svelte", value: "svelte" },
-    { label: "Angular", value: "angular" },
-    { label: "Ember", value: "ember", disable: true },
-    { label: "Gatsby", value: "gatsby", disable: true },
-    { label: "Astro", value: "astro" },
+const MultipleSelect = ({ onChange }: { onChange: (value: number[]) => void }) => {
+
+
+  const STUDENT_OPTIONS = [
+    { label: "SK1A", value: "SK1A" },
+    { label: "SK2A", value: "SK2A" },
+    { label: "SK3A", value: "SK3A" },
+    { label: "IE1A", value: "IE1A" },
+    { label: "GE1A", value: "GE1A" },
   ];
 
   return (
 
     <MultipleSelector
-      defaultOptions={OPTIONS}
+      defaultOptions={STUDENT_OPTIONS}
+      onChange={async (selectedItems) => {
+        // Fetch user IDs for selected class names
+        const userIds: number[] = [];
+
+        for (const item of selectedItems) {
+          const hrClass = item.value; // Get the class name
+          try {
+            const response = await fetch(`http://localhost:3000/students/hr-class/${hrClass}`);
+            const data = await response.json();
+
+            if (data.data && Array.isArray(data.data)) {
+              data.data.forEach((student: { student_user_id: number; }) => {
+                if (student.student_user_id) {
+                  userIds.push(student.student_user_id);
+                }
+              });
+            }
+          } catch (error) {
+            console.error(`Error fetching user IDs for class ${hrClass}:`, error);
+          }
+        }
+
+        // Call the parent onChange handler with fetched user IDs
+        onChange(userIds);
+      }}
       placeholder="Select Class..."
       emptyIndicator={
-        <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+        < p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400" >
           No results found.
-        </p>
+        </p >
       }
     />
 
@@ -269,7 +290,7 @@ const SendMenu = ({ editor, title }: { editor: Editor | null; title: string }) =
 
         {/* Multiple Selector for mentioned_user_ids */}
         <div className="self-start max-w-[500px] w-full">
-          <MultipleSelect />
+          <MultipleSelect onChange={handleMentionedUsers} />
         </div>
 
         {/* Category Selector */}
