@@ -68,7 +68,7 @@ function MainComponent() {
   return (
     <div className="space-y-2 pb-10">
       <h4 className="text-xl font-bold underline">{post.title}</h4>
-      <div className="text-sm">{post.body}</div>
+      <div className="prose dark:prose-invert">{post.body}</div>
 
       <article className='prose dark:prose-invert'
         dangerouslySetInnerHTML={{ __html: content }}
