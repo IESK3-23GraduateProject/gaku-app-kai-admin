@@ -1,18 +1,11 @@
 import axios from "axios";
 
-export type PostType = {
-  id: string;
-  title: string;
-  body: string;
-};
-
 export class PostNotFoundError extends Error {}
 
 export const fetchPost = async (postId: string) => {
   console.info(`Fetching post with id ${postId}...`);
-  await new Promise((r) => setTimeout(r, 500));
   const post = await axios
-    .get<PostType>(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+    .get(`http://localhost:3000/student-news/${postId}`)
     .then((r) => r.data)
     .catch((err) => {
       if (err.status === 404) {
@@ -26,8 +19,7 @@ export const fetchPost = async (postId: string) => {
 
 export const fetchPosts = async () => {
   console.info("Fetching posts...");
-  await new Promise((r) => setTimeout(r, 500));
   return axios
-    .get<Array<PostType>>("https://jsonplaceholder.typicode.com/posts")
+    .get("http://localhost:3000/student-news")
     .then((r) => r.data.slice(0, 50));
 };
