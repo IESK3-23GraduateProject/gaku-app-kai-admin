@@ -1,3 +1,4 @@
+import { useRouter } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -27,6 +28,8 @@ import axios from "axios";
 export const Route = createFileRoute("/news/create")({
   component: EditorComponent,
 });
+
+
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
@@ -219,6 +222,8 @@ const SendMenu = ({ editor, title }: { editor: Editor | null; title: string }) =
   const [mentionedUserIds, setMentionedUserIds] = useState<number[]>([]); // Selected mentioned user IDs
   const [endpoint, setEndpoint] = useState("student-news"); // Default endpoint
 
+  const router = useRouter(); // Router instance for redirection
+
   const handleCategoryChange = (value: string) => {
     setCategory(value);
     console.log("Selected category:", value);
@@ -260,7 +265,9 @@ const SendMenu = ({ editor, title }: { editor: Editor | null; title: string }) =
 
       const response = await axios.post(url, payload);
       console.log("Response:", response.data);
-
+      router.navigate({
+        to: "/news/main",
+      });
     } catch (error) {
       console.error("Error sending news:", error);
     }
