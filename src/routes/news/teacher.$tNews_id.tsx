@@ -1,4 +1,4 @@
-import { postQueryOptions } from '../../api/queries/posts-query'
+import { postQueryOptions } from '../../api/queries/tNews-query'
 import {
   ErrorComponent,
   createFileRoute,

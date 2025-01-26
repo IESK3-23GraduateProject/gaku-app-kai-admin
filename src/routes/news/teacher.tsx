@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { postsQueryOptions } from "../../api/queries/posts-query";
+import { postsQueryOptions } from "../../api/queries/tNews-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   ResizableHandle,
@@ -48,10 +48,10 @@ function NewsComponent() {
             <div className="max-h-screen flex-1 overflow-y-auto">
               {posts.map((post: any) => (
                 <Link
-                  key={post.student_news_id}
+                  key={post.teacher_admin_news_id}
                   to="/news/teacher/$tNews_id"
                   params={{
-                    tNews_id: post.student_news_id,
+                    tNews_id: post.teacher_admin_news_id,
                   }}
                 >
                   <div
