@@ -266,7 +266,7 @@ const SendMenu = ({ editor, title }: { editor: Editor | null; title: string }) =
       const response = await axios.post(url, payload);
       console.log("Response:", response.data);
       router.navigate({
-        to: "/news/main",
+        to: "/",
       });
     } catch (error) {
       console.error("Error sending news:", error);
