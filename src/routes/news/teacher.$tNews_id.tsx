@@ -1,4 +1,4 @@
-import { postQueryOptions } from '../../api/queries/tNews-query'
+import { tNewspostQueryOptions } from '../../api/queries/tNews-query'
 import {
   ErrorComponent,
   createFileRoute,
@@ -11,7 +11,7 @@ import type { ErrorComponentProps } from '@tanstack/react-router'
 export const Route = createFileRoute('/news/teacher/$tNews_id')({
   // @ts-expect-error queryClient
   loader: ({ context: { queryClient }, params: { tNews_id } }) => {
-    return queryClient.ensureQueryData(postQueryOptions(tNews_id))
+    return queryClient.ensureQueryData(tNewspostQueryOptions(tNews_id))
   },
   errorComponent: MainErrorComponent,
   component: MainComponent,
@@ -41,7 +41,7 @@ export function MainErrorComponent({ error }: ErrorComponentProps) {
 
 function MainComponent() {
   const postId = Route.useParams().tNews_id
-  const { data: post } = useSuspenseQuery(postQueryOptions(postId))
+  const { data: post } = useSuspenseQuery(tNewspostQueryOptions(postId))
 
   if (!post) return <div>Loading...</div>
 

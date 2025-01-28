@@ -72,21 +72,6 @@ export const data = {
         },
       ],
     },
-    // {
-    //   title: "担任クラス",
-    //   url: "hr_class",
-    //   icon: PieChart,
-    //   items: [
-    //     {
-    //       title: "学生",
-    //       url: "hr_class/students",
-    //     },
-    //     {
-    //       title: "学生個人連絡",
-    //       url: "hr_class/contact",
-    //     },
-    //   ],
-    // },
     {
       title: "その他",
       url: "other",

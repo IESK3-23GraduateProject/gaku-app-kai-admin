@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import { postsQueryOptions } from "../../api/queries/tNews-query";
+import { tNewsQueryOptions } from "../../api/queries/tNews-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   ResizableHandle,
@@ -37,7 +37,7 @@ const getCategoryClass = (category: string) => {
 };
 
 function NewsComponent() {
-  const postsQuery = useSuspenseQuery(postsQueryOptions);
+  const postsQuery = useSuspenseQuery(tNewsQueryOptions);
   const posts = postsQuery.data;
 
   return (
