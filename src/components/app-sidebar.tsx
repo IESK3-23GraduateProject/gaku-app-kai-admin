@@ -8,7 +8,6 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavAdmin } from "@/components/nav-admin"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -73,21 +72,21 @@ export const data = {
         },
       ],
     },
-    {
-      title: "担任クラス",
-      url: "hr_class",
-      icon: PieChart,
-      items: [
-        {
-          title: "学生",
-          url: "hr_class/students",
-        },
-        {
-          title: "学生個人連絡",
-          url: "hr_class/contact",
-        },
-      ],
-    },
+    // {
+    //   title: "担任クラス",
+    //   url: "hr_class",
+    //   icon: PieChart,
+    //   items: [
+    //     {
+    //       title: "学生",
+    //       url: "hr_class/students",
+    //     },
+    //     {
+    //       title: "学生個人連絡",
+    //       url: "hr_class/contact",
+    //     },
+    //   ],
+    // },
     {
       title: "その他",
       url: "other",
@@ -122,7 +121,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavAdmin projects={data.admin} />
+        {/* <NavAdmin projects={data.admin} /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

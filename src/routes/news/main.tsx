@@ -60,15 +60,14 @@ function NewsComponent() {
                   }}
                 >
                   <div
-                    className={`p-4 border-b cursor-pointer hover:bg-gray-50 ${!post.is_read ? "bg-yellow-50" : ""
-                      }`}
+                    className={`p-4 border-b cursor-pointer hover:bg-gray-50`}
                   >
                     {/* Title and "Unread" Badge */}
                     <div className="flex justify-between items-start mb-1">
                       <span className="font-medium text-black">{post.title}</span>
                       {!post.is_read && (
-                        <span className="ml-2 text-xs text-white bg-red-500 px-2 py-1 rounded">
-                          Unread
+                        <span className="ml-2 text-xs text-white bg-blue-400 px-2 py-1 rounded">
+                          New
                         </span>
                       )}
                     </div>
