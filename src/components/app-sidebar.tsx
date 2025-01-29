@@ -67,7 +67,7 @@ export const data = {
           url: "absences/authorized_absence",
         },
         {
-          title: "遅刻",
+          title: "遅刻・欠席",
           url: "absences/late_absence",
         },
       ],
