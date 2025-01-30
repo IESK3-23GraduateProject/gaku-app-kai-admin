@@ -6,11 +6,6 @@ export const Route = createFileRoute('/absences')({
 
 function AbsencesComponent() {
   return (
-    <div className="p-2">
-      <div>I'm a Absences Layout</div>
-      <div>
-        <Outlet />
-      </div>
-    </div>
+    <Outlet />
   )
 }

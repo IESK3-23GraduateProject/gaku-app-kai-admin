@@ -11,7 +11,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 export const Route = createFileRoute("/news/main/$main_id")({
   // @ts-expect-error queryClient
   loader: ({ context: { queryClient }, params: { main_id } }) => {
-    queryClient.invalidateQueries(["posts"]);
+    queryClient.invalidateQueries(["posts", { field: "is_read" }]);
     return queryClient.ensureQueryData(postQueryOptions(main_id));
   },
   errorComponent: MainErrorComponent,
